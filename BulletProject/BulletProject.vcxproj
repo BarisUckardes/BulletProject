@@ -175,9 +175,11 @@ xcopy /y "$(SolutionDir)ExternalLibs\GLUT\bin\x64\freeglut.dll" "$(SolutionDir)b
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="src\Renderer\ForwardRenderer.cpp" />
+    <ClCompile Include="src\Graphics\Shader\ShaderProgram.cpp" />
     <ClCompile Include="src\Graphics\Mesh\SphereGenerator.cpp" />
     <ClCompile Include="src\Graphics\Mesh\Mesh.cpp" />
+    <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\World\Components\OrbitComponent.cpp" />
     <ClCompile Include="src\World\Components\SphereColliderComponent.cpp" />
     <ClCompile Include="src\World\Components\ObserverComponent.cpp" />
@@ -192,10 +194,13 @@ xcopy /y "$(SolutionDir)ExternalLibs\GLUT\bin\x64\freeglut.dll" "$(SolutionDir)b
     <ClCompile Include="src\World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="src\Graphics\Debug\GLDebug.h" />
+    <ClInclude Include="src\Renderer\ForwardRenderer.h" />
+    <ClInclude Include="src\Graphics\Shader\ShaderProgram.h" />
     <ClInclude Include="src\Graphics\Mesh\SphereGenerator.h" />
     <ClInclude Include="src\Graphics\Mesh\Mesh.h" />
     <ClInclude Include="src\Graphics\Mesh\MeshVertex.h" />
+    <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\Resources\ShaderResources.h" />
     <ClInclude Include="src\World\Components\OrbitComponent.h" />
     <ClInclude Include="src\World\Components\SphereColliderComponent.h" />

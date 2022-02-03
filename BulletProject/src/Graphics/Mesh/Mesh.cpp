@@ -52,6 +52,11 @@ Mesh::Mesh(const Array<MeshVertex>& vertexes, const Array<int>& indexes)
     * Unbind index buffer
     */
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+    /*
+    * Store index count
+    */
+    m_IndexCount = indexes.GetCursor();
 }
 
 Mesh::~Mesh()
@@ -60,15 +65,20 @@ Mesh::~Mesh()
 
 unsigned int Mesh::GetVertexArrayIndex() const
 {
-    return 0;
+    return m_VertexArrayIndex;
 }
 
 unsigned int Mesh::GetVertexBufferIndex() const
 {
-    return 0;
+    return m_VertexBufferIndex;
 }
 
 unsigned int Mesh::GetIndexBufferIndex() const
 {
-    return 0;
+    return m_IndexBufferIndex;
+}
+
+unsigned int Mesh::GetIndexCount() const
+{
+    return m_IndexCount;
 }

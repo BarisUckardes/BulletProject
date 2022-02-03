@@ -62,6 +62,13 @@ public:
 	/// Swaps the swapchain framebuffer
 	/// </summary>
 	void Swapbuffers();
+
+	/// <summary>
+	/// Called when resized
+	/// </summary>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
+	void OnWindowResized(int width, int height);
 private:
 	String m_Title;
 	int m_OffsetX;

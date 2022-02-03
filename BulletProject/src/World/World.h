@@ -6,7 +6,9 @@ class RenderableComponent;
 class ObserverComponent;
 class SphereColliderComponent;
 class Window;
-
+class Entity;
+class Component;
+class Renderer;
 /// <summary>
 /// Represents a scene state with the collection of objects
 /// </summary>
@@ -20,6 +22,37 @@ public:
 	/// Ticks this world's physics,logic and rendering routines
 	/// </summary>
 	void TickWorld();
+
+	/// <summary>
+	/// Creates new entity into this world
+	/// </summary>
+	/// <param name="name"></param>
+	/// <returns></returns>
+	Entity* CreateEntity(const String& name);
+
+	/// <summary>
+	/// Registers a logic tickable component
+	/// </summary>
+	/// <param name="component"></param>
+	void RegisterLogicComponent(Component* component);
+
+	/// <summary>
+	/// Registers a renderable component
+	/// </summary>
+	/// <param name="component"></param>
+	void RegisterRenderableComponent(RenderableComponent* component);
+
+	/// <summary>
+	/// Registers an observer component
+	/// </summary>
+	/// <param name="component"></param>
+	void RegisterObserverComponent(ObserverComponent* component);
+
+	/// <summary>
+	/// Registers a collider component
+	/// </summary>
+	/// <param name="component"></param>
+	void RegisterColliderComponent(SphereColliderComponent* component);
 private:
 	/// <summary>
 	/// Solves the physical state of the world
@@ -39,7 +72,9 @@ private:
 	Array<RenderableComponent*> m_Renderables;
 	Array<ObserverComponent*> m_Observers;
 	Array<SphereColliderComponent*> m_Colliders;
-
-	Window* m_Window;
+	Array<Component*> m_TickableComponents;
+	Array<Entity*> m_Entities;
+	Renderer* m_Renderer;
+	const Window* m_Window;
 };
 

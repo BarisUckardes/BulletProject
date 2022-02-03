@@ -4,7 +4,7 @@
 /// <summary>
 /// Component class which behaves as a orbit around an another entity
 /// </summary>
-class OrbitComponent : Component
+class OrbitComponent : public Component
 {
 public:
 	OrbitComponent(Entity* targetEntity,float distance, float speed);
@@ -22,6 +22,8 @@ public:
 	/// </summary>
 	/// <param name="speed"></param>
 	void SetSpeed(float speed);
+
+	virtual void OnLogicTick() override;
 private:
 	Entity* m_TargetEntity;
 	float m_Distance;

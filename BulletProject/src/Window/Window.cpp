@@ -4,19 +4,37 @@
 #include <stdio.h>
 
 Window* s_Window = nullptr;
-
-void OnDisplay();
+void g_OnDisplay();
+void g_OnWindowResized(int width, int height);
 Window::Window(const String& title, int offsetX, int offsetY, int width, int height,WindowCmdArgs args)
 {
+	/*
+	* Set properties
+	*/
+	m_OffsetX = offsetX;
+	m_OffsetY = offsetY;
+	m_Width = width;
+	m_Height = height;
+
 	/*
 	* Initialize glut library
 	*/
 	glutInit(&args.Count, args.Arguments);
 
+	
+#ifdef DEBUG_MODE
+	glutInitContextFlags(GLUT_FORWARD_COMPATIBLE | GLUT_DEBUG);
+	glewExperimental = true;
+#else
+	glutInitContextFlags(GLUT_FORWARD_COMPATIBLE);
+#endif
+	glutInitContextProfile(GLUT_CORE_PROFILE);
+	glutInitContextVersion(4, 5);
+
 	/*
 	* Initialize glut swapchain frambuffer mode
 	*/
-	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
+	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);
 
 	/*
 	* Initialize window properties
@@ -33,7 +51,8 @@ Window::Window(const String& title, int offsetX, int offsetY, int width, int hei
 	/*
 	* Set event callbacks
 	*/
-	glutDisplayFunc(OnDisplay); //apperently this is mandatory
+	glutDisplayFunc(g_OnDisplay); //apperently this is mandatory
+	glutReshapeFunc(g_OnWindowResized);
 
 	/*
 	* Set window global
@@ -43,16 +62,17 @@ Window::Window(const String& title, int offsetX, int offsetY, int width, int hei
 	/*
 	* Initialize glew
 	*/
+	glewExperimental = true;
 	if (glewInit() != GLEW_OK)
 	{
 		LOG("Glew ýnitialization failed!");
 	}
+
 #ifdef DEBUG_MODE
 	glDebugMessageCallback(
 		[](GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 		{
-			if (severity == GL_DEBUG_SEVERITY_HIGH)
-				printf("OPENGL ERROR: %s\n", message);
+				LOG("OPENGL ERROR: %s", message);
 		}
 	, nullptr);
 #endif
@@ -103,9 +123,19 @@ void Window::Swapbuffers()
 	glutSwapBuffers();
 }
 
-int d = 0;
-void OnDisplay()
+void Window::OnWindowResized(int width, int height)
 {
-	printf("Display %d\n",d);
+	m_Width = width;
+	m_Height = height;
+}
+
+unsigned long long d = 0;
+void g_OnDisplay()
+{
+	LOG("Frame %ld",d);
 	d++;
+}
+void g_OnWindowResized(int width, int height)
+{
+	s_Window->OnWindowResized(width, height);
 }

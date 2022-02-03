@@ -30,9 +30,16 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	FORCEINLINE unsigned int GetIndexBufferIndex() const;
+
+	/// <summary>
+	/// Returns vertex count
+	/// </summary>
+	/// <returns></returns>
+	FORCEINLINE unsigned int GetIndexCount() const;
 private:
 	unsigned int m_VertexArrayIndex;
 	unsigned int m_VertexBufferIndex;
 	unsigned int m_IndexBufferIndex;
+	unsigned int m_IndexCount;
 };
 

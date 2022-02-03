@@ -2,7 +2,7 @@
 #include <Memory/String.h>
 class Entity;
 class Spatial;
-class Component
+class EXPORT Component
 {
 	friend class Entity;
 public:
@@ -21,13 +21,19 @@ public:
 	/// <summary>
 	/// Called when first created, used for registering certain type of components to world view
 	/// </summary>
-	virtual void OnInitialize() {}
+	virtual void OnInitialize();
 
 	/// <summary>
 	/// Returns the spatial component of this component's entity
 	/// </summary>
 	/// <returns></returns>
 	FORCEINLINE Spatial* GetSpatial() const;
+
+	/// <summary>
+	/// Returns the owning entity of this component
+	/// </summary>
+	/// <returns></returns>
+	FORCEINLINE Entity* GetOwnerEntity() const;
 protected:
 	Component() = default;
 	~Component() = default;

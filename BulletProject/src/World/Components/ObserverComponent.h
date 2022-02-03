@@ -6,11 +6,12 @@
 /// <summary>
 /// A component which holds the camera information
 /// </summary>
-class ObserverComponent : public Component
+class EXPORT ObserverComponent : public Component
 {
 public:
+	ObserverComponent();
 	virtual bool ShouldLogicTick() const override  { return false; }
-
+	virtual void OnInitialize() override;
 	/// <summary>
 	/// Returns the projection matrix
 	/// </summary>

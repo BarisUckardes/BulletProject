@@ -16,3 +16,8 @@ void OrbitComponent::SetSpeed(float speed)
 {
     m_Speed = speed;
 }
+
+void OrbitComponent::OnLogicTick()
+{
+    LOG("Orbit component tickk!");
+}

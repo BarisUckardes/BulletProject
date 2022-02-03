@@ -1,5 +1,5 @@
 #include "Spatial.h"
-
+#include <glm/gtc/matrix_transform.hpp>
 Spatial::Spatial()
 {
     m_Position = glm::vec4(0);
@@ -9,7 +9,7 @@ Spatial::Spatial()
 
 glm::vec3 Spatial::GetPosition() const
 {
-    return glm::vec3();
+    return m_Position;
 }
 
 glm::vec3 Spatial::GetRotation() const
@@ -44,5 +44,11 @@ bool Spatial::ShouldLogicTick() const
 
 glm::mat4x4 Spatial::GetModelMatrix() const
 {
-    return glm::mat4x4();
+
+    return
+        glm::translate(glm::mat4x4(1), m_Position) *
+        glm::scale(glm::mat4x4(1), glm::vec3(m_Scale, m_Scale, m_Scale)) *
+        glm::rotate(glm::mat4x4(1), 45.0f, glm::vec3(1.0f, 0, 0))*
+        glm::rotate(glm::mat4x4(1), 0.0f, glm::vec3(0, 0, 0))*
+        glm::rotate(glm::mat4x4(1), 0.0f, glm::vec3(0, 0, 1.0f));
 }

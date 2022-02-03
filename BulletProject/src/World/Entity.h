@@ -10,7 +10,7 @@ class Spatial;
 /// <summary>
 /// Most basic unit in world
 /// </summary>
-class Entity : public Object
+class EXPORT Entity : public Object
 {
 	friend class World;
 public:
@@ -61,7 +61,7 @@ inline TComponent* Entity::AddComponent(TParameters ...parameters)
 	/*
 	* Call on register
 	*/
-	component->OnRegister();
+	component->OnInitialize();
 
 	/*
 	* Register

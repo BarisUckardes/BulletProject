@@ -1,5 +1,27 @@
 #include "ShaderProgram.h"
 #include <GL/glew.h>
+
+
+void LogShader(unsigned int shaderID)
+{
+    GLint state = 0;
+    glGetShaderiv(shaderID, GL_COMPILE_STATUS, &state);
+    if (state == GL_FALSE)
+    {
+        GLint maxLength = 255;
+        glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &maxLength);
+
+        char* errorLog = new char[maxLength];
+        glGetShaderInfoLog(shaderID, maxLength, &maxLength, errorLog);
+
+        printf("Shader error: %s\n", errorLog);
+    }
+    else
+    {
+        LOG("Vertex create okey.");
+    }
+}
+
 ShaderProgram::ShaderProgram(const String& vertexSource, const String& fragmentSource)
 {
     /*
@@ -21,7 +43,8 @@ ShaderProgram::ShaderProgram(const String& vertexSource, const String& fragmentS
     */
     glCompileShader(vertexShaderIndex);
     glCompileShader(fragmentShaderIndex);
-
+    LogShader(vertexShaderIndex);
+    LogShader(fragmentShaderIndex);
     /*
     * Create shader program
     */
@@ -44,7 +67,7 @@ ShaderProgram::~ShaderProgram()
 
 }
 
-unsigned int ShaderProgram::GetProgramIndex()
+unsigned int ShaderProgram::GetProgramIndex() const
 {
-    return 0;
+    return m_ProgramIndex;
 }

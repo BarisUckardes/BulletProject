@@ -15,7 +15,7 @@ public:
 	/// Returns the program index
 	/// </summary>
 	/// <returns></returns>
-	FORCEINLINE unsigned int GetProgramIndex();
+	FORCEINLINE unsigned int GetProgramIndex() const;
 private:
 	unsigned int m_ProgramIndex;
 };

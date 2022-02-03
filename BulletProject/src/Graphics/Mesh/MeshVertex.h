@@ -4,6 +4,13 @@
 
 struct MeshVertex
 {
+	MeshVertex(float positionX, float positionY, float positionZ, float normalX, float normalY, float normalZ, float uvX, float uvY)
+	{
+		Position = glm::vec3(positionX, positionY, positionZ);
+		Normal = glm::vec3(normalX, normalY, normalZ);
+		TextureCoordinate = glm::vec2(uvX, uvY);
+	}
+	MeshVertex() = default;
 	/// <summary>
 	/// Position of the vertex
 	/// </summary>
