@@ -7,8 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletProject", "BulletProj
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLEW", "GLEW\GLEW.vcxproj", "{089DF23E-7DE6-443D-BD32-4BA6944B222A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLUT", "GLUT\GLUT.vcxproj", "{9999F99C-015F-4D8E-9E53-8B1375FC20EC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -33,14 +31,6 @@ Global
 		{089DF23E-7DE6-443D-BD32-4BA6944B222A}.Release|x64.Build.0 = Release|x64
 		{089DF23E-7DE6-443D-BD32-4BA6944B222A}.Release|x86.ActiveCfg = Release|Win32
 		{089DF23E-7DE6-443D-BD32-4BA6944B222A}.Release|x86.Build.0 = Release|Win32
-		{9999F99C-015F-4D8E-9E53-8B1375FC20EC}.Debug|x64.ActiveCfg = Debug|x64
-		{9999F99C-015F-4D8E-9E53-8B1375FC20EC}.Debug|x64.Build.0 = Debug|x64
-		{9999F99C-015F-4D8E-9E53-8B1375FC20EC}.Debug|x86.ActiveCfg = Debug|Win32
-		{9999F99C-015F-4D8E-9E53-8B1375FC20EC}.Debug|x86.Build.0 = Debug|Win32
-		{9999F99C-015F-4D8E-9E53-8B1375FC20EC}.Release|x64.ActiveCfg = Release|x64
-		{9999F99C-015F-4D8E-9E53-8B1375FC20EC}.Release|x64.Build.0 = Release|x64
-		{9999F99C-015F-4D8E-9E53-8B1375FC20EC}.Release|x86.ActiveCfg = Release|Win32
-		{9999F99C-015F-4D8E-9E53-8B1375FC20EC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
