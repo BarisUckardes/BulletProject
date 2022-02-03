@@ -77,6 +77,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)binary\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)binary-intermediate\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -92,16 +94,20 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;DEBUG_MODE</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ExternalLibs\GLUT\include;$(SolutionDir)ExternalLibs\GLEW\include;$(SolutionDir)ExternalLibs\GLM\;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ExternalLibs\GLUT\include;$(SolutionDir)ExternalLibs\GLM\;src;%(AdditionalIncludeDirectories);$(SolutionDir)ExternalLibs\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)binary\$(Configuration)-$(Platform)\GLEW\;$(SolutionDir)ExternalLibs\GLUT\lib\x86\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLUT.lib;GLEW.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)binary\$(Configuration)-$(Platform)\GLEW\;$(SolutionDir)ExternalLibs\GLUT\lib\x86\;$(SolutionDir)ExternalLibs\GLEW\lib\x86\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /y "$(SolutionDir)ExternalLibs\GLEW\bin\x86\glew32.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\BulletProject\"
+xcopy /y "$(SolutionDir)ExternalLibs\GLUT\bin\x86\freeglut.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\BulletProject\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -111,31 +117,39 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ExternalLibs\GLUT\include;$(SolutionDir)ExternalLibs\GLEW\include;$(SolutionDir)ExternalLibs\GLM\;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ExternalLibs\GLUT\include;$(SolutionDir)ExternalLibs\GLEW\include;$(SolutionDir)ExternalLibs\GLM\;src;%(AdditionalIncludeDirectories);$(SolutionDir)ExternalLibs\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)binary\$(Configuration)-$(Platform)\GLEW\;$(SolutionDir)ExternalLibs\GLUT\lib\x86\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);GLUT.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)binary\$(Configuration)-$(Platform)\GLEW\;$(SolutionDir)ExternalLibs\GLUT\lib\x86\;$(SolutionDir)ExternalLibs\GLEW\lib\x86\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);glew32.lib;freeglut.lib</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /y "$(SolutionDir)ExternalLibs\GLEW\bin\x86\glew32.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\BulletProject\"
+xcopy /y "$(SolutionDir)ExternalLibs\GLUT\bin\x64\freeglut.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\BulletProject\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;DEBUG_MODE</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ExternalLibs\GLUT\include;$(SolutionDir)ExternalLibs\GLEW\include;$(SolutionDir)ExternalLibs\GLM\;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ExternalLibs\GLUT\include;$(SolutionDir)ExternalLibs\GLEW\include;$(SolutionDir)ExternalLibs\GLM\;src;%(AdditionalIncludeDirectories);$(SolutionDir)ExternalLibs\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)binary\$(Configuration)-$(Platform)\GLEW\;$(SolutionDir)ExternalLibs\GLUT\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLUT.lib;GLEW.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)binary\$(Configuration)-$(Platform)\GLEW\;$(SolutionDir)ExternalLibs\GLUT\lib\x64\;$(SolutionDir)ExternalLibs\GLEW\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /y "$(SolutionDir)ExternalLibs\GLEW\bin\x64\glew32.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\BulletProject\"
+xcopy /y "$(SolutionDir)ExternalLibs\GLUT\bin\x64\freeglut.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\BulletProject\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -145,16 +159,20 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ExternalLibs\GLUT\include;$(SolutionDir)ExternalLibs\GLEW\include;$(SolutionDir)ExternalLibs\GLM\;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ExternalLibs\GLUT\include;$(SolutionDir)ExternalLibs\GLEW\include;$(SolutionDir)ExternalLibs\GLM\;src;%(AdditionalIncludeDirectories);$(SolutionDir)ExternalLibs\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)binary\$(Configuration)-$(Platform)\GLEW\;$(SolutionDir)ExternalLibs\GLUT\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLUT.lib;GLEW.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)binary\$(Configuration)-$(Platform)\GLEW\;$(SolutionDir)ExternalLibs\GLUT\lib\x64\;$(SolutionDir)ExternalLibs\GLEW\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /y "$(SolutionDir)ExternalLibs\GLEW\bin\x64\glew32.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\BulletProject\"
+xcopy /y "$(SolutionDir)ExternalLibs\GLUT\bin\x64\freeglut.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\BulletProject\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ShaderProgram.cpp" />

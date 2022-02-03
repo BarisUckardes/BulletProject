@@ -1,6 +1,5 @@
 #include "Mesh.h"
-#include <GLEW/glew.h>
-#include <gl/GL.h>
+#include <GL/glew.h>
 #include <Graphics/Mesh/MeshVertex.h>
 #include <Graphics/Mesh/SphereGenerator.h>
 Mesh::Mesh(const Array<MeshVertex>& vertexes, const Array<int>& indexes)

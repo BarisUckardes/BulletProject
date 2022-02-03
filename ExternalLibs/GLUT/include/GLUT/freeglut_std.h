@@ -78,7 +78,7 @@
 
             /* Link with Win32 shared freeglut lib */
 #           if FREEGLUT_LIB_PRAGMAS
-#             pragma comment (lib, "GLUT.lib")
+#             pragma comment (lib, "freeglut.lib")
 #           endif
 
 #       endif

@@ -1,4 +1,5 @@
 #include "Window.h"
+#include <GL/glew.h>
 #include <GLUT/freeglut.h>
 #include <stdio.h>
 
@@ -38,6 +39,23 @@ Window::Window(const String& title, int offsetX, int offsetY, int width, int hei
 	* Set window global
 	*/
 	s_Window = this;
+
+	/*
+	* Initialize glew
+	*/
+	if (glewInit() != GLEW_OK)
+	{
+		LOG("Glew ýnitialization failed!");
+	}
+#ifdef DEBUG_MODE
+	glDebugMessageCallback(
+		[](GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+		{
+			if (severity == GL_DEBUG_SEVERITY_HIGH)
+				printf("OPENGL ERROR: %s\n", message);
+		}
+	, nullptr);
+#endif
 }
 
 Window::~Window()

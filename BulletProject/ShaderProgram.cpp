@@ -1,5 +1,5 @@
 #include "ShaderProgram.h"
-#include <GLEW/glew.h>
+#include <GL/glew.h>
 ShaderProgram::ShaderProgram(const String& vertexSource, const String& fragmentSource)
 {
     /*
