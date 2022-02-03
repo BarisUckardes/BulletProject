@@ -23,3 +23,8 @@ void RenderableComponent::OnInitialize()
     GetOwnerEntity()->GetOwnerWorld()->RegisterRenderableComponent(this);
 }
 
+void RenderableComponent::OnDestroyed()
+{
+    GetOwnerEntity()->GetOwnerWorld()->RemoveRenderableComponent(this);
+}
+

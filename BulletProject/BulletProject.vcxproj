@@ -175,6 +175,7 @@ xcopy /y "$(SolutionDir)ExternalLibs\GLUT\bin\x64\freeglut.dll" "$(SolutionDir)b
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\World\Components\CameraMovement.cpp" />
     <ClCompile Include="src\Renderer\ForwardRenderer.cpp" />
     <ClCompile Include="src\Graphics\Shader\ShaderProgram.cpp" />
     <ClCompile Include="src\Graphics\Mesh\SphereGenerator.cpp" />
@@ -194,7 +195,10 @@ xcopy /y "$(SolutionDir)ExternalLibs\GLUT\bin\x64\freeglut.dll" "$(SolutionDir)b
     <ClCompile Include="src\World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\World\Components\CameraMovement.h" />
     <ClInclude Include="src\Graphics\Debug\GLDebug.h" />
+    <ClInclude Include="src\Graphics\Mesh\ExternalGenerator.h" />
+    <ClInclude Include="src\Graphics\Mesh\SphereQuad.h" />
     <ClInclude Include="src\Renderer\ForwardRenderer.h" />
     <ClInclude Include="src\Graphics\Shader\ShaderProgram.h" />
     <ClInclude Include="src\Graphics\Mesh\SphereGenerator.h" />

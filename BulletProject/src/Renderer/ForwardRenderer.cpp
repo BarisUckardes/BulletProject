@@ -1,7 +1,7 @@
 #include "ForwardRenderer.h"
 #include <GL/glew.h>
-#include <Graphics/Debug/GLDebug.h>
 #include <World/Components/Spatial.h>
+
 void ForwardRenderer::Render(const Array<RenderableComponent*>& renderables, const Array<ObserverComponent*>& observerComponents)
 {
 	/*
@@ -62,6 +62,8 @@ void ForwardRenderer::Render(const Array<RenderableComponent*>& renderables, con
 			const ShaderProgram* program = renderable->GetProgram();
 			const glm::mat4x4 modelMatrix = renderable->GetSpatial()->GetModelMatrix();
 			const glm::mat4x4 mvpMatrix = projectionMatrix * viewMatrix * modelMatrix;
+			const glm::mat4x4 mv = viewMatrix * modelMatrix;
+			const glm::mat4x4 pv = projectionMatrix * viewMatrix;
 			//const glm::mat4x4 mvpMatrix = projectionMatrix * viewMatrix;
 			//const glm::mat4x4 mvpMatrix = projectionMatrix * viewMatrix * modelMatrix;
 			//const glm::mat4x4 mvpMatrix = projectionMatrix;
@@ -92,6 +94,11 @@ void ForwardRenderer::Render(const Array<RenderableComponent*>& renderables, con
 				1,
 				GL_FALSE,
 				&mvpMatrix[0][0]);
+			glUniformMatrix4fv(
+				glGetUniformLocation(programIndex, "v_Model"),
+				1,
+				GL_FALSE,
+				&pv[0][0]);
 
 			/*
 			* Issue draw call

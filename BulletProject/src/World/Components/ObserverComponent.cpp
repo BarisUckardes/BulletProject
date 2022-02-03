@@ -17,6 +17,11 @@ void ObserverComponent::OnInitialize()
     GetOwnerEntity()->GetOwnerWorld()->RegisterObserverComponent(this);
 }
 
+void ObserverComponent::OnDestroyed()
+{
+    GetOwnerEntity()->GetOwnerWorld()->RemoveObserverComponent(this);
+}
+
 glm::mat4x4 ObserverComponent::GetProjectionMatrix() const
 {
     /*

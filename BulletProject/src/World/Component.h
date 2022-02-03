@@ -34,9 +34,21 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	FORCEINLINE Entity* GetOwnerEntity() const;
+
+	/// <summary>
+	/// Returns whether the key is down or not
+	/// </summary>
+	/// <param name="key"></param>
+	/// <returns></returns>
+	FORCEINLINE bool IsKeyDown(unsigned int key) const;
 protected:
 	Component() = default;
 	~Component() = default;
+
+	/// <summary>
+	/// Called when destroyed
+	/// </summary>
+	virtual void OnDestroyed();
 private:
 	
 

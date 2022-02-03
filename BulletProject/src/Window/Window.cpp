@@ -1,13 +1,21 @@
 #include "Window.h"
 #include <GL/glew.h>
-#include <GLUT/freeglut.h>
+#include <GL/freeglut.h>
 #include <stdio.h>
 
 Window* s_Window = nullptr;
 void g_OnDisplay();
 void g_OnWindowResized(int width, int height);
+void g_OnKey(unsigned char c,int,int);
+void g_OnKeyUp(unsigned char c, int, int);
 Window::Window(const String& title, int offsetX, int offsetY, int width, int height,WindowCmdArgs args)
 {
+	/*
+	* Create key map
+	*/
+	for (int i = 0; i < 360; i++)
+		m_Keys.Add(false);
+
 	/*
 	* Set properties
 	*/
@@ -23,7 +31,7 @@ Window::Window(const String& title, int offsetX, int offsetY, int width, int hei
 
 	
 #ifdef DEBUG_MODE
-	glutInitContextFlags(GLUT_FORWARD_COMPATIBLE | GLUT_DEBUG);
+	glutInitContextFlags(GLUT_FORWARD_COMPATIBLE | GLUT_DEPTH | GLUT_DEBUG);
 	glewExperimental = true;
 #else
 	glutInitContextFlags(GLUT_FORWARD_COMPATIBLE);
@@ -48,11 +56,15 @@ Window::Window(const String& title, int offsetX, int offsetY, int width, int hei
 	*/
 	glutCreateWindow("Bullet Application");
 
+	glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
+
 	/*
 	* Set event callbacks
 	*/
 	glutDisplayFunc(g_OnDisplay); //apperently this is mandatory
 	glutReshapeFunc(g_OnWindowResized);
+	glutKeyboardFunc(g_OnKey);
+	glutKeyboardUpFunc(g_OnKeyUp);
 
 	/*
 	* Set window global
@@ -67,6 +79,7 @@ Window::Window(const String& title, int offsetX, int offsetY, int width, int hei
 	{
 		LOG("Glew ýnitialization failed!");
 	}
+	glEnable(GL_DEPTH_TEST);
 
 #ifdef DEBUG_MODE
 	glDebugMessageCallback(
@@ -129,13 +142,35 @@ void Window::OnWindowResized(int width, int height)
 	m_Height = height;
 }
 
+void Window::OnKeyPress(unsigned char key)
+{
+	m_Keys[key] = true;
+}
+
+void Window::OnKeyUp(unsigned int key)
+{
+	m_Keys[key] = false;
+}
+
+const Array<bool>& Window::GetKeyState() const
+{
+	return m_Keys;
+}
+
 unsigned long long d = 0;
 void g_OnDisplay()
 {
-	LOG("Frame %ld",d);
 	d++;
 }
 void g_OnWindowResized(int width, int height)
 {
 	s_Window->OnWindowResized(width, height);
+}
+void g_OnKey(unsigned char key, int a, int b)
+{
+	s_Window->OnKeyPress(key);
+}
+void g_OnKeyUp(unsigned char key, int a, int b)
+{
+	s_Window->OnKeyUp(key);
 }

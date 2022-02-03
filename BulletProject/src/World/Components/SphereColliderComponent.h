@@ -8,7 +8,8 @@ class SphereColliderComponent : public Component
 {
 public:
 	virtual bool ShouldLogicTick() const override final { return false; }
-
+	virtual void OnInitialize() override;
+	virtual void OnDestroyed() override;
 
 	/// <summary>
 	/// Returns the radius of the collider

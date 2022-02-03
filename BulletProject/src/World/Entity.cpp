@@ -8,6 +8,52 @@ World* Entity::GetOwnerWorld() const
 {
 	return m_OwnerWorld;
 }
+bool Entity::IsDestroyed() const
+{
+	return m_bDestroyed;
+}
+void Entity::DestroyEntity()
+{
+	/*
+	* Unregister entity from the world
+	*/
+
+	/*
+	* Destroy components
+	*/
+	for (unsigned int i = 0; i < m_Components.GetCursor(); i++)
+	{
+		/*
+		* Get component
+		*/
+		DestroyComponent(m_Components[i]);
+	}
+
+	/*
+	* Mark as destroyed
+	*/
+	m_bDestroyed = true;
+}
+void Entity::DestroyComponent(Component* component)
+{
+	/*
+	* Get index
+	*/
+	int index = m_Components.FindIndex(component);
+
+	/*
+	* Validate index
+	*/
+	if (index == -1)
+		return;
+
+	/*
+	* Destroy
+	*/
+	m_Components[index]->OnDestroyed();
+	m_Components.Remove(component);
+
+}
 Entity::Entity(World* ownerWorld,const String& name)
 {
 	/*

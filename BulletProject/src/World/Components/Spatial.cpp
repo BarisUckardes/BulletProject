@@ -3,7 +3,7 @@
 Spatial::Spatial()
 {
     m_Position = glm::vec4(0);
-    m_Rotation = glm::vec4(4);
+    m_Rotation = glm::vec4(0);
     m_Scale = 1.0f;
 }
 
@@ -44,11 +44,12 @@ bool Spatial::ShouldLogicTick() const
 
 glm::mat4x4 Spatial::GetModelMatrix() const
 {
+    glm::mat4x4 model(1.0f);
+    model = glm::translate(model, m_Position);
+    model = glm::scale(model, glm::vec3(m_Scale));
+    model = glm::rotate(model, glm::radians(m_Rotation.x), glm::vec3(1.0f, 0, 0));
+    model = glm::rotate(model, glm::radians(m_Rotation.y), glm::vec3(0.0f, 1.0f, 0));
+    model = glm::rotate(model, glm::radians(m_Rotation.z), glm::vec3(0.0f, 0, 1.0f));
+    return model;
 
-    return
-        glm::translate(glm::mat4x4(1), m_Position) *
-        glm::scale(glm::mat4x4(1), glm::vec3(m_Scale, m_Scale, m_Scale)) *
-        glm::rotate(glm::mat4x4(1), 45.0f, glm::vec3(1.0f, 0, 0))*
-        glm::rotate(glm::mat4x4(1), 0.0f, glm::vec3(0, 0, 0))*
-        glm::rotate(glm::mat4x4(1), 0.0f, glm::vec3(0, 0, 1.0f));
 }

@@ -25,6 +25,7 @@ in vec3 f_Normal;
 in vec2 f_TextureCoordinate;
 void main()
 {
-	f_ColorOut = vec4(255,255,255,1);
+	float diffusePower = (dot(f_Normal,vec3(0,1,0)) + 1) /2.0f;
+	f_ColorOut = vec4(diffusePower,diffusePower,diffusePower,1.0f);
 }
 )glsl";

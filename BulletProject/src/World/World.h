@@ -12,7 +12,7 @@ class Renderer;
 /// <summary>
 /// Represents a scene state with the collection of objects
 /// </summary>
-class World
+class EXPORT World
 {
 public:
 	World(const Window* window);
@@ -37,10 +37,22 @@ public:
 	void RegisterLogicComponent(Component* component);
 
 	/// <summary>
+	/// Removes the logic tickable component
+	/// </summary>
+	/// <param name="component"></param>
+	void RemoveLogicComponent(Component* component);
+
+	/// <summary>
 	/// Registers a renderable component
 	/// </summary>
 	/// <param name="component"></param>
 	void RegisterRenderableComponent(RenderableComponent* component);
+
+	/// <summary>
+	/// Removes the renderable component
+	/// </summary>
+	/// <param name="component"></param>
+	void RemoveRenderableComponent(RenderableComponent* component);
 
 	/// <summary>
 	/// Registers an observer component
@@ -49,10 +61,24 @@ public:
 	void RegisterObserverComponent(ObserverComponent* component);
 
 	/// <summary>
+	/// Removes the observer component
+	/// </summary>
+	/// <param name="component"></param>
+	void RemoveObserverComponent(ObserverComponent* component);
+
+	/// <summary>
 	/// Registers a collider component
 	/// </summary>
 	/// <param name="component"></param>
 	void RegisterColliderComponent(SphereColliderComponent* component);
+
+	/// <summary>
+	/// Removes the collider component
+	/// </summary>
+	/// <param name="component"></param>
+	void RemoveColliderComponent(SphereColliderComponent* component);
+
+	FORCEINLINE bool IsKeyDown(unsigned int key);
 private:
 	/// <summary>
 	/// Solves the physical state of the world
@@ -68,6 +94,11 @@ private:
 	/// Renders the renderables from the view of the observers
 	/// </summary>
 	void TickRendering();
+
+	/// <summary>
+	/// Refreshes the input state
+	/// </summary>
+	void TickInput();
 
 	Array<RenderableComponent*> m_Renderables;
 	Array<ObserverComponent*> m_Observers;

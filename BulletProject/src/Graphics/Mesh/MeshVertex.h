@@ -10,6 +10,8 @@ struct MeshVertex
 		Normal = glm::vec3(normalX, normalY, normalZ);
 		TextureCoordinate = glm::vec2(uvX, uvY);
 	}
+	MeshVertex(const glm::vec3& position,const glm::vec3& normal,const glm::vec2& textureCoordinate) : Position(position),Normal(normal),TextureCoordinate(textureCoordinate) {}
+
 	MeshVertex() = default;
 	/// <summary>
 	/// Position of the vertex

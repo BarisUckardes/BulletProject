@@ -1,10 +1,14 @@
 #include "OrbitComponent.h"
-
-OrbitComponent::OrbitComponent(Entity* targetEntity, float distance, float speed)
+#include <glm/trigonometric.hpp>
+#include <glm/vec3.hpp>
+#include <World/Components/Spatial.h>
+#include <World/Entity.h>
+OrbitComponent::OrbitComponent(Entity* targetEntity, float distance, float speed,float startAngle)
 {
     m_TargetEntity = targetEntity;
     m_Distance = distance;
     m_Speed = speed;
+    m_CurrentAngle = startAngle;
 }
 
 float OrbitComponent::GetSpeed() const
@@ -19,5 +23,25 @@ void OrbitComponent::SetSpeed(float speed)
 
 void OrbitComponent::OnLogicTick()
 {
-    LOG("Orbit component tickk!");
+    
+    /*
+    * Current angle to direction
+    */
+    const float cos = glm::cos(glm::radians(m_CurrentAngle));
+    const float sin = glm::sin(glm::radians(m_CurrentAngle));
+
+    /*
+    * Create direction vector
+    */
+    const glm::vec3 directionVector(cos,0.0f,sin);
+
+    /*
+    * Set orbit
+    */
+    GetSpatial()->SetPosition(m_TargetEntity->GetSpatial()->GetPosition() + directionVector*m_Distance);
+
+    /*
+    * Increment angle
+    */
+    m_CurrentAngle += m_Speed;
 }

@@ -69,7 +69,26 @@ public:
 	/// <param name="width"></param>
 	/// <param name="height"></param>
 	void OnWindowResized(int width, int height);
+
+	/// <summary>
+	/// Called when key pressed
+	/// </summary>
+	/// <param name="key"></param>
+	void OnKeyPress(unsigned char key);
+
+	/// <summary>
+	/// Called when key released
+	/// </summary>
+	/// <param name="key"></param>
+	void OnKeyUp(unsigned int key);
+
+	/// <summary>
+	/// Returns the key state
+	/// </summary>
+	/// <returns></returns>
+	FORCEINLINE const Array<bool>& GetKeyState() const;
 private:
+	Array<bool> m_Keys;
 	String m_Title;
 	int m_OffsetX;
 	int m_OffsetY;

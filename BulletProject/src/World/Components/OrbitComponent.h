@@ -7,7 +7,7 @@
 class OrbitComponent : public Component
 {
 public:
-	OrbitComponent(Entity* targetEntity,float distance, float speed);
+	OrbitComponent(Entity* targetEntity,float distance, float speed,float startAngle);
 
 	virtual bool ShouldLogicTick() const override { return true; }
 
@@ -28,5 +28,6 @@ private:
 	Entity* m_TargetEntity;
 	float m_Distance;
 	float m_Speed;
+	float m_CurrentAngle;
 };
 

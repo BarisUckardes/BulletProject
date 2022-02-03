@@ -12,6 +12,7 @@ public:
 	ObserverComponent();
 	virtual bool ShouldLogicTick() const override  { return false; }
 	virtual void OnInitialize() override;
+	virtual void OnDestroyed() override;
 	/// <summary>
 	/// Returns the projection matrix
 	/// </summary>

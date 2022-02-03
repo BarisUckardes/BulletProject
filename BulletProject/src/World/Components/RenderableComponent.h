@@ -25,6 +25,7 @@ public:
 
 	virtual bool ShouldLogicTick() const override { return false; }
 	virtual void OnInitialize() override;
+	virtual void OnDestroyed() override;
 private:
 	ShaderProgram* m_Program;
 	Mesh* m_Mesh;

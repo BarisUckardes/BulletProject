@@ -35,6 +35,20 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	FORCEINLINE World* GetOwnerWorld() const;
+
+	//Returns whether this entity is destroyed
+	FORCEINLINE bool IsDestroyed() const;
+
+	/// <summary>
+	/// Destroys this entity
+	/// </summary>
+	void DestroyEntity();
+
+	/// <summary>
+	/// Destroys a child component
+	/// </summary>
+	/// <param name="component"></param>
+	void DestroyComponent(Component* component);
 private:
 	Entity(World* ownerWorld,const String& name = "Undefined name");
 	~Entity();
@@ -42,6 +56,7 @@ private:
 	Array<Component*> m_Components;
 	World* m_OwnerWorld;
 	Spatial* m_Spatial;
+	bool m_bDestroyed;
 	
 };
 
