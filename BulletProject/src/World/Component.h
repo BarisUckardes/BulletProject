@@ -35,12 +35,17 @@ public:
 	/// <returns></returns>
 	FORCEINLINE Entity* GetOwnerEntity() const;
 
-	/// <summary>
-	/// Returns whether the key is down or not
-	/// </summary>
-	/// <param name="key"></param>
-	/// <returns></returns>
+
+	FORCEINLINE void ShowCursor() const;
+	FORCEINLINE void HideCursor() const;
+	FORCEINLINE void FlushMouseDelta() const;
+	FORCEINLINE void SetCursorPosition(int x,int y) const;
 	FORCEINLINE bool IsKeyDown(unsigned int key) const;
+	FORCEINLINE bool IsButtonDown(unsigned int button) const;
+	FORCEINLINE int GetMouseX() const;
+	FORCEINLINE int GetMouseY() const;
+	FORCEINLINE int GetMouseDeltaX() const;
+	FORCEINLINE int GetMosueDeltaY() const;
 protected:
 	Component() = default;
 	~Component() = default;

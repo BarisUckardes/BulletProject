@@ -30,6 +30,18 @@ public:
 	FORCEINLINE float GetScale() const;
 
 	/// <summary>
+	/// Returns the forward vector for this entity
+	/// </summary>
+	/// <returns></returns>
+	FORCEINLINE glm::vec3 GetForwardVector() const;
+
+	/// <summary>
+	/// Returns the right vector for this entity
+	/// </summary>
+	/// <returns></returns>
+	FORCEINLINE glm::vec3 GetRightVector() const;
+
+	/// <summary>
 	/// Sets the position of the entity
 	/// </summary>
 	/// <param name="position"></param>

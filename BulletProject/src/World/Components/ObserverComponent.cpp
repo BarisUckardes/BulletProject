@@ -43,7 +43,7 @@ glm::mat4x4 ObserverComponent::GetViewMatrix() const
     /*
     * Get the look direction
     */
-    const glm::vec3 lookDirection = glm::vec3(0, 0, 1);
+    const glm::vec3 lookDirection = GetSpatial()->GetForwardVector();
 
     /*
     * Create position

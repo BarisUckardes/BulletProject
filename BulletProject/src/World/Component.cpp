@@ -18,9 +18,54 @@ Entity* Component::GetOwnerEntity() const
 	return m_OwnerEntity;
 }
 
+void Component::ShowCursor() const
+{
+	m_OwnerEntity->GetOwnerWorld()->ShowCursor();
+}
+
+void Component::HideCursor() const
+{
+	m_OwnerEntity->GetOwnerWorld()->HideCursor();
+}
+
+void Component::FlushMouseDelta() const
+{
+	m_OwnerEntity->GetOwnerWorld()->FlushMouseDelta();
+}
+
+void Component::SetCursorPosition(int x, int y) const
+{
+	m_OwnerEntity->GetOwnerWorld()->SetCursorPositionUndetected(x, y);
+}
+
 bool Component::IsKeyDown(unsigned int key) const
 {
 	return m_OwnerEntity->GetOwnerWorld()->IsKeyDown(key);
+}
+
+bool Component::IsButtonDown(unsigned int button) const
+{
+	return m_OwnerEntity->GetOwnerWorld()->IsMouseButtonDown(button);
+}
+
+int Component::GetMouseX() const
+{
+	return m_OwnerEntity->GetOwnerWorld()->GetMouseX();
+}
+
+int Component::GetMouseY() const
+{
+	return m_OwnerEntity->GetOwnerWorld()->GetMouseY();
+}
+
+int Component::GetMouseDeltaX() const
+{
+	return m_OwnerEntity->GetOwnerWorld()->GetMouseDeltaX();
+}
+
+int Component::GetMosueDeltaY() const
+{
+	return m_OwnerEntity->GetOwnerWorld()->GetMouseDeltaY();
 }
 
 void Component::OnDestroyed()

@@ -8,6 +8,9 @@ void g_OnDisplay();
 void g_OnWindowResized(int width, int height);
 void g_OnKey(unsigned char c,int,int);
 void g_OnKeyUp(unsigned char c, int, int);
+void g_OnMouse(int button, int key, int x, int y);
+void g_OnMouseMove(int x, int y);
+void g_OnIdle();
 Window::Window(const String& title, int offsetX, int offsetY, int width, int height,WindowCmdArgs args)
 {
 	/*
@@ -15,6 +18,8 @@ Window::Window(const String& title, int offsetX, int offsetY, int width, int hei
 	*/
 	for (int i = 0; i < 360; i++)
 		m_Keys.Add(false);
+	for (int i = 0; i < 10; i++)
+		m_MouseButtons.Add(false);
 
 	/*
 	* Set properties
@@ -65,7 +70,10 @@ Window::Window(const String& title, int offsetX, int offsetY, int width, int hei
 	glutReshapeFunc(g_OnWindowResized);
 	glutKeyboardFunc(g_OnKey);
 	glutKeyboardUpFunc(g_OnKeyUp);
-
+	glutMouseFunc(g_OnMouse);
+	glutPassiveMotionFunc(g_OnMouseMove);
+	glutMotionFunc(g_OnMouseMove);
+	glutIdleFunc(g_OnIdle);
 	/*
 	* Set window global
 	*/
@@ -151,10 +159,84 @@ void Window::OnKeyUp(unsigned int key)
 {
 	m_Keys[key] = false;
 }
+unsigned long long a = 0;
+void Window::OnMouseMove(int x, int y)
+{
+	a++;
+	/*
+	* Generate new mouse delta
+	*/
+	m_MouseDeltaX = x - m_MouseX;
+	m_MouseDeltaY = y - m_MouseY;
+
+	/*
+	* Set new mouse position
+	*/
+	m_MouseX = x;
+	m_MouseY = y;
+}
+
+void Window::OnMouseButtonDown(int button)
+{
+	m_MouseButtons[button] = true;
+}
+
+void Window::OnMouseButtonUp(int button)
+{
+	m_MouseButtons[button] = false;
+}
+
+void Window::HideCursor() const
+{
+	glutSetCursor(GLUT_CURSOR_NONE);
+}
+
+void Window::ShowCursor() const
+{
+	glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+}
+
+void Window::SetCursorPositionUndetected(int x, int y)
+{
+	glutWarpPointer(x, y);
+	m_MouseX = x;
+	m_MouseY = y;
+}
+
+void Window::FlushMouseDelta() 
+{
+	m_MouseDeltaX = 0;
+	m_MouseDeltaY = 0;
+}
+
+int Window::GetMouseX() const
+{
+	return m_MouseX;
+}
+
+int Window::GetMouseY() const
+{
+	return m_MouseY;
+}
+
+int Window::GetMouseDeltaX() const
+{
+	return m_MouseDeltaX;
+}
+
+int Window::GetMouseDeltaY() const
+{
+	return m_MouseDeltaY;
+}
 
 const Array<bool>& Window::GetKeyState() const
 {
 	return m_Keys;
+}
+
+const Array<bool>& Window::GetMouseButtonState() const
+{
+	return m_MouseButtons;
 }
 
 unsigned long long d = 0;
@@ -173,4 +255,30 @@ void g_OnKey(unsigned char key, int a, int b)
 void g_OnKeyUp(unsigned char key, int a, int b)
 {
 	s_Window->OnKeyUp(key);
+}
+void g_OnMouse(int button, int state, int x, int y)
+{
+	/*
+	* Catch supported states
+	*/
+	if (state == GLUT_DOWN)
+	{
+		s_Window->OnMouseButtonDown(button);
+	}
+	else if(state == GLUT_UP)
+	{
+		s_Window->OnMouseButtonUp(button);
+	}
+	s_Window->OnMouseMove(x, y);
+}
+void g_OnMouseMove(int x, int y)
+{
+	s_Window->OnMouseMove(x, y);
+}
+void g_OnIdle()
+{
+	const int x = s_Window->GetMouseX();
+	const int y = s_Window->GetMouseY();
+	s_Window->OnMouseMove(x, y);
+	LOG("IDLE");
 }

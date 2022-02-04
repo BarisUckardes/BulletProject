@@ -1,10 +1,11 @@
 #include "RenderableComponent.h"
 #include <World/World.h>
 #include <World/Entity.h>
-RenderableComponent::RenderableComponent(Mesh* mesh, ShaderProgram* program)
+RenderableComponent::RenderableComponent(Mesh* mesh, ShaderProgram* program,const glm::vec4& color)
 {
     m_Mesh = mesh;
     m_Program = program;
+    m_CustomColor = color;
 }
 
 Mesh* RenderableComponent::GetMesh() const
@@ -15,6 +16,11 @@ Mesh* RenderableComponent::GetMesh() const
 ShaderProgram* RenderableComponent::GetProgram() const
 {
     return m_Program;
+}
+
+glm::vec4 RenderableComponent::GetColor() const
+{
+    return m_CustomColor;
 }
 
 void RenderableComponent::OnInitialize()

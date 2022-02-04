@@ -2,7 +2,7 @@
 #include <World/Entity.h>
 #include <World/Component.h>
 #include <Renderer/ForwardRenderer.h>
-World::World(const Window* window)
+World::World(Window* window)
 {
 	m_Window = window;
 
@@ -79,9 +79,54 @@ void World::RemoveColliderComponent(SphereColliderComponent* component)
 	m_Colliders.Remove(component);
 }
 
-bool World::IsKeyDown(unsigned int key)
+void World::ShowCursor() const
+{
+	m_Window->ShowCursor();
+}
+
+void World::HideCursor() const
+{
+	m_Window->HideCursor();
+}
+
+void World::SetCursorPositionUndetected(int x, int y)
+{
+	m_Window->SetCursorPositionUndetected(x, y);
+}
+
+void World::FlushMouseDelta()
+{
+	m_Window->FlushMouseDelta();
+}
+
+int World::GetMouseX() const
+{
+	return m_Window->GetMouseX();
+}
+
+int World::GetMouseY() const
+{
+	return m_Window->GetMouseY();
+}
+
+bool World::IsKeyDown(unsigned int key) const
 {
 	return m_Window->GetKeyState()[key];
+}
+
+bool World::IsMouseButtonDown(unsigned int button) const
+{
+	return m_Window->GetMouseButtonState()[button];
+}
+
+int World::GetMouseDeltaX() const
+{
+	return m_Window->GetMouseDeltaX();
+}
+
+int World::GetMouseDeltaY() const
+{
+	return m_Window->GetMouseDeltaY();
 }
 
 void World::SolvePhysics()

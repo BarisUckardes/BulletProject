@@ -193,6 +193,7 @@ xcopy /y "$(SolutionDir)$(ProjectName)\ExternalLibs\GLUT\bin\x64\freeglut.dll" "
     <ClCompile Include="src\Memory\String.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
     <ClCompile Include="src\World\World.cpp" />
+    <ClCompile Include="src\World\Components\WeaponComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\World\Components\CameraMovement.h" />
@@ -219,6 +220,7 @@ xcopy /y "$(SolutionDir)$(ProjectName)\ExternalLibs\GLUT\bin\x64\freeglut.dll" "
     <ClInclude Include="src\Memory\String.h" />
     <ClInclude Include="src\Window\Window.h" />
     <ClInclude Include="src\World\World.h" />
+    <ClInclude Include="src\World\Components\WeaponComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ExternalLibs\GLEW\bin\x64\glew32.dll" />

@@ -23,9 +23,11 @@ const char g_SphereFragmentSource[] = R"glsl(
 out vec4 f_ColorOut;
 in vec3 f_Normal;
 in vec2 f_TextureCoordinate;
+uniform vec4 f_Color;
 void main()
 {
 	float diffusePower = (dot(f_Normal,vec3(0,1,0)) + 1) /2.0f;
-	f_ColorOut = vec4(diffusePower,diffusePower,diffusePower,1.0f);
+	vec4 finalColor = diffusePower*f_Color;
+	f_ColorOut = vec4(finalColor.rgb,1.0f);
 }
 )glsl";

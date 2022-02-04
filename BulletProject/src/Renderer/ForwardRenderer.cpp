@@ -64,6 +64,7 @@ void ForwardRenderer::Render(const Array<RenderableComponent*>& renderables, con
 			const glm::mat4x4 mvpMatrix = projectionMatrix * viewMatrix * modelMatrix;
 			const glm::mat4x4 mv = viewMatrix * modelMatrix;
 			const glm::mat4x4 pv = projectionMatrix * viewMatrix;
+			const glm::vec4 customColor = renderable->GetColor();
 			//const glm::mat4x4 mvpMatrix = projectionMatrix * viewMatrix;
 			//const glm::mat4x4 mvpMatrix = projectionMatrix * viewMatrix * modelMatrix;
 			//const glm::mat4x4 mvpMatrix = projectionMatrix;
@@ -99,6 +100,7 @@ void ForwardRenderer::Render(const Array<RenderableComponent*>& renderables, con
 				1,
 				GL_FALSE,
 				&pv[0][0]);
+			glUniform4fv(glGetUniformLocation(programIndex, "f_Color"), 1, &customColor.x);
 
 			/*
 			* Issue draw call

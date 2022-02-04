@@ -15,7 +15,7 @@ class Renderer;
 class EXPORT World
 {
 public:
-	World(const Window* window);
+	World(Window* window);
 	~World();
 
 	/// <summary>
@@ -78,7 +78,40 @@ public:
 	/// <param name="component"></param>
 	void RemoveColliderComponent(SphereColliderComponent* component);
 
-	FORCEINLINE bool IsKeyDown(unsigned int key);
+
+	FORCEINLINE void ShowCursor() const;
+	FORCEINLINE void HideCursor() const;
+	FORCEINLINE void SetCursorPositionUndetected(int x, int y);
+	FORCEINLINE void FlushMouseDelta();
+	FORCEINLINE int GetMouseX() const;
+	FORCEINLINE int GetMouseY() const;
+
+	/// <summary>
+	/// Returns whether the key specified is down or not
+	/// </summary>
+	/// <param name="key"></param>
+	/// <returns></returns>
+	FORCEINLINE bool IsKeyDown(unsigned int key) const;
+
+	/// <summary>
+	/// Returns whether the mouse button is down or not
+	/// </summary>
+	/// <param name="button"></param>
+	/// <returns></returns>
+	FORCEINLINE bool IsMouseButtonDown(unsigned int button) const;
+
+	/// <summary>
+	/// Returns the amount of mouse displacement for one frame x
+	/// </summary>
+	/// <returns></returns>
+	FORCEINLINE int GetMouseDeltaX() const;
+
+	/// <summary>
+	/// Returns the amount of mouse displacement for one frame y
+	/// </summary>
+	/// <returns></returns>
+	FORCEINLINE int GetMouseDeltaY() const;
+
 private:
 	/// <summary>
 	/// Solves the physical state of the world
@@ -106,6 +139,6 @@ private:
 	Array<Component*> m_TickableComponents;
 	Array<Entity*> m_Entities;
 	Renderer* m_Renderer;
-	const Window* m_Window;
+	Window* m_Window;
 };
 
