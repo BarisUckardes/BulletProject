@@ -175,6 +175,10 @@ xcopy /y "$(SolutionDir)$(ProjectName)\ExternalLibs\GLUT\bin\x64\freeglut.dll" "
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\World\Components\ParentComponent.cpp" />
+    <ClCompile Include="src\PhySolver\IterativePhySolver.cpp" />
+    <ClCompile Include="src\PhySolver\PhySolver.cpp" />
+    <ClCompile Include="src\World\Components\BulletComponent.cpp" />
     <ClCompile Include="src\World\Components\CameraMovement.cpp" />
     <ClCompile Include="src\Renderer\ForwardRenderer.cpp" />
     <ClCompile Include="src\Graphics\Shader\ShaderProgram.cpp" />
@@ -196,6 +200,10 @@ xcopy /y "$(SolutionDir)$(ProjectName)\ExternalLibs\GLUT\bin\x64\freeglut.dll" "
     <ClCompile Include="src\World\Components\WeaponComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\World\Components\ParentComponent.h" />
+    <ClInclude Include="src\PhySolver\IterativePhySolver.h" />
+    <ClInclude Include="src\PhySolver\PhySolver.h" />
+    <ClInclude Include="src\World\Components\BulletComponent.h" />
     <ClInclude Include="src\World\Components\CameraMovement.h" />
     <ClInclude Include="src\Graphics\Debug\GLDebug.h" />
     <ClInclude Include="src\Graphics\Mesh\ExternalGenerator.h" />

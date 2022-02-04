@@ -9,6 +9,7 @@ class Window;
 class Entity;
 class Component;
 class Renderer;
+class PhySolver;
 /// <summary>
 /// Represents a scene state with the collection of objects
 /// </summary>
@@ -139,6 +140,7 @@ private:
 	Array<Component*> m_TickableComponents;
 	Array<Entity*> m_Entities;
 	Renderer* m_Renderer;
+	PhySolver* m_PhySolver;
 	Window* m_Window;
 };
 

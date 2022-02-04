@@ -2,6 +2,7 @@
 #include <World/Entity.h>
 #include <World/Component.h>
 #include <Renderer/ForwardRenderer.h>
+#include <PhySolver/IterativePhySolver.h>
 World::World(Window* window)
 {
 	m_Window = window;
@@ -11,6 +12,11 @@ World::World(Window* window)
 	*/
 	m_Renderer = new ForwardRenderer();
 	m_Renderer->SetWindow(m_Window);
+
+	/*
+	* Create physics solver
+	*/
+	m_PhySolver = new IterativePhySolver();
 }
 
 World::~World()
@@ -131,7 +137,39 @@ int World::GetMouseDeltaY() const
 
 void World::SolvePhysics()
 {
+	/*
+	* Get collsion reprots
+	*/
+	Array<CollisionReport> reports;
+	m_PhySolver->Solve(m_Colliders, reports);
 
+	/*
+	* Broadcast collision reports
+	*/
+	for (unsigned int reportIndex = 0; reportIndex < reports.GetCursor(); reportIndex++)
+	{
+		/*
+		* Get report
+		*/
+		CollisionReport& report = reports[reportIndex];
+
+		/*
+		* Get components
+		*/
+		Array<Component*> components = report.Self->GetComponents();
+
+		/*
+		* Iterate self entity components
+		*/
+		for (unsigned int componentIndex = 0; componentIndex < components.GetCursor(); componentIndex++)
+		{
+			/*
+			* Invoke callback
+			*/
+			components[componentIndex]->OnCollision(report.Other);
+		}
+		
+	}
 }
 
 void World::TickLogic()

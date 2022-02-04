@@ -4,7 +4,7 @@
 /// <summary>
 /// Component class which behaves as a orbit around an another entity
 /// </summary>
-class OrbitComponent : public Component
+class EXPORT OrbitComponent : public Component
 {
 public:
 	OrbitComponent(Entity* targetEntity,float distance, float speed,float startAngle);

@@ -4,9 +4,10 @@
 /// <summary>
 /// Basic component for detecting sphere collision
 /// </summary>
-class SphereColliderComponent : public Component
+class EXPORT SphereColliderComponent : public Component
 {
 public:
+	SphereColliderComponent(float radius);
 	virtual bool ShouldLogicTick() const override final { return false; }
 	virtual void OnInitialize() override;
 	virtual void OnDestroyed() override;

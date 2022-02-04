@@ -25,10 +25,35 @@ public:
 	TComponent* AddComponent(TParameters... parameters);
 
 	/// <summary>
+	/// Returns the component by type
+	/// </summary>
+	/// <typeparam name="TComponent"></typeparam>
+	/// <returns></returns>
+	template<typename TComponent>
+	TComponent* GetComponent() const
+	{
+		/*
+		* ITereate
+		*/
+		for (unsigned int i = 0; i < m_Components.GetCursor(); i++)
+		{
+			Component* component = dynamic_cast<TComponent*>(m_Components[i]);
+			if (component != nullptr)
+				return (TComponent*)component;
+		}
+		return nullptr;
+	}
+	/// <summary>
 	/// Returns the spatial component of this entity
 	/// </summary>
 	/// <returns></returns>
 	FORCEINLINE Spatial* GetSpatial() const;
+
+	/// <summary>
+	/// Returns the components of this entity
+	/// </summary>
+	/// <returns></returns>
+	FORCEINLINE Array<Component*> GetComponents() const;
 
 	/// <summary>
 	/// Returns the world which entity belongs to

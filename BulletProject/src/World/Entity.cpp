@@ -4,6 +4,10 @@ Spatial* Entity::GetSpatial() const
 {
 	return m_Spatial;
 }
+Array<Component*> Entity::GetComponents() const
+{
+	return m_Components;
+}
 World* Entity::GetOwnerWorld() const
 {
 	return m_OwnerWorld;
@@ -27,7 +31,14 @@ void Entity::DestroyEntity()
 		* Get component
 		*/
 		DestroyComponent(m_Components[i]);
+
+		/*
+		* Destroy
+		*/
+		m_Components[i]->OnDestroyed();
 	}
+
+	m_Components.Clear();
 
 	/*
 	* Mark as destroyed
@@ -36,22 +47,7 @@ void Entity::DestroyEntity()
 }
 void Entity::DestroyComponent(Component* component)
 {
-	/*
-	* Get index
-	*/
-	int index = m_Components.FindIndex(component);
 
-	/*
-	* Validate index
-	*/
-	if (index == -1)
-		return;
-
-	/*
-	* Destroy
-	*/
-	m_Components[index]->OnDestroyed();
-	m_Components.Remove(component);
 
 }
 Entity::Entity(World* ownerWorld,const String& name)

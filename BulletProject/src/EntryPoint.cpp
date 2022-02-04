@@ -10,6 +10,8 @@
 #include <World/Components/CameraMovement.h>
 #include <World/Components/Spatial.h>
 #include <Graphics/Mesh/SphereGenerator.h>
+#include <World/Components/WeaponComponent.h>
+#include <World/Components/ParentComponent.h>
 #define CAMERA_SPEED 1
 #define CAMERA_ROTATION 60
 #define ORBIT_DISTANCE 3.0f
@@ -21,7 +23,9 @@
 #define PARENT_SPHERE_SIZE 2
 #define PARENT_COLOR glm::vec4(0.3f,0.8f,0.2f,1.0f)
 #define CHILD_COLOR glm::vec4(0.2f,0.4f,0.9f,1.0f)
-#define BULLET_COLOR glm::vec4(0.9,0.1f,0.1f)
+#define BULLET_COLOR glm::vec4(0.9,0.1f,0.1f,1.0f)
+#define BULLET_SIZE 0.6f
+#define BULLET_SPEED 3.0f
 
 void GenerateSceneLayout(World* world)
 {
@@ -40,6 +44,7 @@ void GenerateSceneLayout(World* world)
 	observerComponent->SetClearColor(glm::vec4(100 / 255.0f, 149 / 255.0f, 237 / 255.0f, 1.0f));
 	observerEntity->GetSpatial()->SetPosition(glm::vec3(0.5f, 0, -55.0f));
 	observerEntity->AddComponent<CameraMovement>(CAMERA_SPEED, CAMERA_ROTATION);
+	observerEntity->AddComponent<WeaponComponent>(BULLET_SPEED,BULLET_SIZE,sphereMesh,sphereProgram,BULLET_COLOR);
 
 	/*
 	* Generate spheres
@@ -56,25 +61,31 @@ void GenerateSceneLayout(World* world)
 			/*
 			* Create parent shpere entity
 			*/
-			Entity* parentEntity = world->CreateEntity("Sphere entity");
+			Entity* parentEntity = world->CreateEntity("ParentEntity");
 			parentEntity->GetSpatial()->SetScale(PARENT_SPHERE_SIZE);
 			parentEntity->AddComponent<RenderableComponent>(sphereMesh, sphereProgram,PARENT_COLOR);
+			parentEntity->AddComponent<SphereColliderComponent>(1.0f);
 			parentEntity->GetSpatial()->SetPosition(offset);
 
 			/*
 			* Create child entites component
 			*/
-			Entity* childEntity0 = world->CreateEntity("Child entity0");
+			Entity* childEntity0 = world->CreateEntity("ChildEntity0");
 			childEntity0->GetSpatial()->SetPosition(offset + glm::vec3(1, 0, 0)*ORBIT_DISTANCE);
 			childEntity0->GetSpatial()->SetScale(CHILD_SPHERE_SIZE);
 			childEntity0->AddComponent<RenderableComponent>(sphereMesh, sphereProgram,CHILD_COLOR);
-			childEntity0->AddComponent<OrbitComponent>(parentEntity,ORBIT_DISTANCE,ORBIT_SPEED,0);
+			OrbitComponent* child0 = childEntity0->AddComponent<OrbitComponent>(parentEntity,ORBIT_DISTANCE,ORBIT_SPEED,0);
 
-			Entity* childEntity1 = world->CreateEntity("Child entity1");
+			Entity* childEntity1 = world->CreateEntity("ChildEntity1");
 			childEntity1->GetSpatial()->SetPosition(offset - glm::vec3(1, 0, 0) * ORBIT_DISTANCE);
 			childEntity1->GetSpatial()->SetScale(CHILD_SPHERE_SIZE);
 			childEntity1->AddComponent<RenderableComponent>(sphereMesh, sphereProgram, CHILD_COLOR);
-			childEntity1->AddComponent<OrbitComponent>(parentEntity, ORBIT_DISTANCE, ORBIT_SPEED,180);
+			OrbitComponent* child1 = childEntity1->AddComponent<OrbitComponent>(parentEntity, ORBIT_DISTANCE, ORBIT_SPEED,180);
+
+			/*
+			* Create parent component
+			*/
+			parentEntity->AddComponent<ParentComponent>(child0,child1);
 
 		}
 	}

@@ -2,6 +2,7 @@
 #include <Memory/String.h>
 class Entity;
 class Spatial;
+class SphereColliderComponent;
 class EXPORT Component
 {
 	friend class Entity;
@@ -17,6 +18,11 @@ public:
 	/// Logic routine of this component
 	/// </summary>
 	virtual void OnLogicTick() {}
+
+	/// <summary>
+	/// Called when collision detected
+	/// </summary>
+	virtual void OnCollision(SphereColliderComponent* otherCollider) {}
 
 	/// <summary>
 	/// Called when first created, used for registering certain type of components to world view

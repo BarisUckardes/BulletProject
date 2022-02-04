@@ -14,6 +14,7 @@ private:
 	glm::vec4 m_Color;
 	float m_BulletSpeed;
 	float m_BulletSize;
+	bool m_bHold;
 	Mesh* m_Mesh;
 	ShaderProgram* m_Program;
 };
