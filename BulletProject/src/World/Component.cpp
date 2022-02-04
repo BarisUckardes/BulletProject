@@ -70,7 +70,6 @@ int Component::GetMosueDeltaY() const
 
 void Component::OnDestroyed()
 {
-	LOG("Component logic destory: %s",*GetOwnerEntity()->GetName())
 	if (ShouldLogicTick())
 	{
 		m_OwnerEntity->GetOwnerWorld()->RemoveLogicComponent(this);

@@ -159,7 +159,7 @@ xcopy /y "$(SolutionDir)$(ProjectName)\ExternalLibs\GLUT\bin\x64\freeglut.dll" "
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ExternalLibs\GLUT\include;$(SolutionDir)ExternalLibs\GLEW\include;$(SolutionDir)$ExternalLibs\GLM\;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ExternalLibs\GLUT\include;$(SolutionDir)ExternalLibs\GLEW\include;$(SolutionDir)ExternalLibs\GLM\;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

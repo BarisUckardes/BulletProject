@@ -48,7 +48,7 @@ void CameraMovement::OnLogicTick()
         /*
         * Hide cursor
         */
-       // HideCursor();
+        HideCursor();
 
         /*
         * Get mouse position
@@ -67,13 +67,11 @@ void CameraMovement::OnLogicTick()
         */
         const int x = GetMouseX();
         const int y = GetMouseY();
-        m_DeltaX = ((float)x - (float)m_CurrentX)*(1280.0f/ 720.0f);
-        m_DeltaY = ((float)y - (float)m_CurrentY)*(1280.0f / 720.0f);
-        m_CurrentX = x;
-        m_CurrentY = y;
+        m_DeltaX = ((float)x - (float)m_MouseClickPositionX);
+        m_DeltaY = ((float)y - (float)m_MouseClickPositionY);
         const float deltaX = m_DeltaX*0.1f;
         const float deltaY = m_DeltaY *0.1f;
-
+        SetCursorPosition(m_MouseClickPositionX, m_MouseClickPositionY);
         GetSpatial()->SetRotation(GetSpatial()->GetRotation() + glm::vec3(-deltaY,deltaX,0 ));
     }
     else if(!IsButtonDown(2) && m_bNavigating)
