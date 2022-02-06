@@ -1,6 +1,7 @@
 #pragma once
 #include <Core/Symbols.h>
 #include <Memory/Array.h>
+
 /// <summary>
 /// Basic string implementation
 /// </summary>

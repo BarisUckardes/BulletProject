@@ -4,7 +4,7 @@
 class OrbitComponent;
 
 /// <summary>
-/// Parent component for managing the child components
+/// The parent sphere for the other two child spheres
 /// </summary>
 class ParentComponent : public Component
 {

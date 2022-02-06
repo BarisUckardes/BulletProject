@@ -1,5 +1,11 @@
 #pragma once
 #include <World/Component.h>
+
+/// <summary>
+/// A component which is responsible for the camera movement
+/// It listens to inputs and roams in the world.
+/// To rotate your camera you must first clikc and hold right mouse button to unlock rotating
+/// </summary>
 class CameraMovement : public Component
 {
 public:

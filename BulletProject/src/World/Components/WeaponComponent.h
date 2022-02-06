@@ -3,6 +3,11 @@
 #include <glm/vec4.hpp>
 class Mesh;
 class ShaderProgram;
+
+/// <summary>
+/// A scripting component which behaves like a weapon
+/// It listens the inputs and fires projectes on click
+/// </summary>
 class WeaponComponent : public Component
 {
 public:

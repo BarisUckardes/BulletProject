@@ -27,8 +27,8 @@ glm::mat4x4 ObserverComponent::GetProjectionMatrix() const
     /*
     * Prepare
     */
-    const float fovInRadians = glm::radians(m_FieldOfView);
-    const float aspectRatio = 1280.f / 720.0f;
+    const float fovInRadians = glm::radians(m_FieldOfView); // field of view required in radias
+    const float aspectRatio = 1280.f / 720.0f; // fixed might cause trouble
 
     return glm::perspective(fovInRadians,aspectRatio,m_NearClip,m_FarClip);
 }

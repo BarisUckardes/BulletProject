@@ -11,9 +11,8 @@ CameraMovement::CameraMovement(float movementSpeed, float rotateSpeed)
 
 void CameraMovement::OnLogicTick()
 {
-
     /*
-    * Catch keys
+    * Listen to the keys
     */
     if (IsKeyDown((unsigned int)'w'))
     {

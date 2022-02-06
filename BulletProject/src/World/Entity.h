@@ -9,6 +9,8 @@ class Spatial;
 
 /// <summary>
 /// Most basic unit in world
+/// It contains components which are the real scrips to be executed everyframe
+/// You can consider the entities are like a pointer to the collection of components but with more functionality along the way
 /// </summary>
 class EXPORT Entity : public Object
 {
@@ -43,6 +45,7 @@ public:
 		}
 		return nullptr;
 	}
+
 	/// <summary>
 	/// Returns the spatial component of this entity
 	/// </summary>
@@ -61,13 +64,15 @@ public:
 	/// <returns></returns>
 	FORCEINLINE World* GetOwnerWorld() const;
 
-	//Returns whether this entity is destroyed
-	FORCEINLINE bool IsDestroyed() const;
-
 	/// <summary>
 	/// Destroys this entity
 	/// </summary>
-	void DestroyEntity();
+	void MarkEntityDestroyed();
+
+	/// <summary>
+	/// Frees the entity components
+	/// </summary>
+	void FreeEntityComponents();
 
 	/// <summary>
 	/// Destroys a child component

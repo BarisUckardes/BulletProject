@@ -2,12 +2,16 @@
 #include <Memory/String.h>
 
 /// <summary>
-/// Wrapper class for openGL shader handles
-/// 
+/// Contains the opengl handles for shader programs
 /// </summary>
 class EXPORT ShaderProgram
 {
 public:
+	/// <summary>
+	/// Takes in vertex and fragment sources and generates shaders and creates a program handle
+	/// </summary>
+	/// <param name="vertexSource"></param>
+	/// <param name="fragmentSource"></param>
 	ShaderProgram(const String& vertexSource, const String& fragmentSource);
 	~ShaderProgram();
 

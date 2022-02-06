@@ -5,10 +5,16 @@
 
 #define M_PI 3.14
 
+/// <summary>
+/// It's local implementation of this sphere generation github repo (https://github.com/caosdoar/spheres)
+/// It basically creates a sphere with the required subdivision parameters
+/// However uv texture coordinates not implemented
+/// </summary>
 struct NormalizedMesh
 {
 	NormalizedMesh() = default;
 	~NormalizedMesh() = default;
+
 	Array<glm::vec3> vertices;
 	Array<uint32_t> triangles;
 
@@ -201,6 +207,11 @@ namespace CubeToSphere
 	};
 };
 
+/// <summary>
+/// Creates a cube which can be projected back to sphere
+/// </summary>
+/// <param name="divisions">Defines how many divisions there must be</param>
+/// <param name="NormalizedMesh">The struct which will be filled with the generated content</param>
 void NormalizedCube(uint32_t divisions, NormalizedMesh& NormalizedMesh)
 {
 	const double step = 1.0 / double(divisions);

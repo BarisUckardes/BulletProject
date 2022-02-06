@@ -23,7 +23,6 @@ void OrbitComponent::SetSpeed(float speed)
 
 void OrbitComponent::OnLogicTick()
 {
-    
     /*
     * Current angle to direction
     */
@@ -33,7 +32,7 @@ void OrbitComponent::OnLogicTick()
     /*
     * Create direction vector
     */
-    const glm::vec3 directionVector(cos,0.0f,sin);
+    const glm::vec3 directionVector(0.0f,cos,sin);
 
     /*
     * Set orbit

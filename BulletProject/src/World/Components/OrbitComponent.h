@@ -2,7 +2,7 @@
 #include <World/Component.h>
 
 /// <summary>
-/// Component class which behaves as a orbit around an another entity
+/// The component which orbits around the target parent entity
 /// </summary>
 class EXPORT OrbitComponent : public Component
 {

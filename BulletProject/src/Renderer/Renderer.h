@@ -3,15 +3,16 @@
 #include <World/Components/RenderableComponent.h>
 #include <World/Components/ObserverComponent.h>
 #include <Window/Window.h>
+
 /// <summary>
-/// Base renderer class to be implemented by other renderers
+/// Basic interface class for creating more than one renderer implemntations
 /// </summary>
 class EXPORT Renderer
 {
 	friend class World;
 public:
 	/// <summary>
-	/// Renders the scene implementation
+	/// Calls the derived class render implementations
 	/// </summary>
 	/// <param name="renderables"></param>
 	/// <param name="observerComponents"></param>

@@ -27,7 +27,7 @@ void BulletComponent::OnLogicTick()
     */
     if (glm::distance(GetSpatial()->GetPosition(), glm::vec3(0)) > 150.0f) // destroy
     {
-        GetOwnerEntity()->DestroyEntity();
+        GetOwnerEntity()->MarkEntityDestroyed();
     }
 }
 
@@ -42,6 +42,6 @@ void BulletComponent::OnCollision(SphereColliderComponent* other)
     if (otherEntity->GetName() == "ParentEntity")
     {
         other->GetOwnerEntity()->GetComponent<ParentComponent>()->DestoryChildOrSelf();
-        this->GetOwnerEntity()->DestroyEntity();
+        this->GetOwnerEntity()->MarkEntityDestroyed();
     }
 }

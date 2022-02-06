@@ -2,8 +2,10 @@
 #include <World/Component.h>
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
+
 /// <summary>
 /// A component which holds spatial information
+/// This component has no scripts
 /// </summary>
 class EXPORT Spatial : public Component
 {

@@ -2,7 +2,8 @@
 #include <Memory/String.h>
 
 /// <summary>
-/// Base object for world related objects
+/// Base object for world related objects such us rendering components and entities
+/// Its just a base class for holding basic data
 /// </summary>
 class EXPORT Object
 {

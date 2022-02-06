@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 Window* s_Window = nullptr;
+
 void g_OnDisplay();
 void g_OnWindowResized(int width, int height);
 void g_OnKey(unsigned char c,int,int);
@@ -11,7 +12,8 @@ void g_OnKeyUp(unsigned char c, int, int);
 void g_OnMouse(int button, int key, int x, int y);
 void g_OnMouseMove(int x, int y);
 void g_OnIdle();
-Window::Window(const String& title, int offsetX, int offsetY, int width, int height,WindowCmdArgs args)
+
+Window::Window(const String& title, int offsetX, int offsetY, int width, int height,WindowCmdArgs args,bool bSetInternalCallback)
 {
 	/*
 	* Create key map
@@ -66,14 +68,20 @@ Window::Window(const String& title, int offsetX, int offsetY, int width, int hei
 	/*
 	* Set event callbacks
 	*/
-	glutDisplayFunc(g_OnDisplay); //apperently this is mandatory
-	glutReshapeFunc(g_OnWindowResized);
-	glutKeyboardFunc(g_OnKey);
-	glutKeyboardUpFunc(g_OnKeyUp);
-	glutMouseFunc(g_OnMouse);
-	glutPassiveMotionFunc(g_OnMouseMove);
-	glutMotionFunc(g_OnMouseMove);
-	glutIdleFunc(g_OnIdle);
+	if (bSetInternalCallback)
+	{
+		glutDisplayFunc(g_OnDisplay); //apperently this is mandatory
+		glutReshapeFunc(g_OnWindowResized);
+
+		glutIdleFunc(g_OnIdle);
+		glutKeyboardFunc(g_OnKey);
+		glutKeyboardUpFunc(g_OnKeyUp);
+
+		glutMouseFunc(g_OnMouse);
+		glutPassiveMotionFunc(g_OnMouseMove);
+		glutMotionFunc(g_OnMouseMove);
+	}
+
 	/*
 	* Set window global
 	*/
@@ -89,6 +97,11 @@ Window::Window(const String& title, int offsetX, int offsetY, int width, int hei
 	}
 	glEnable(GL_DEPTH_TEST);
 
+
+	/*
+	* Create debug callback for debug builds
+	* Opengl broadcasts a message when there is a warning or error with OpenGL api calls
+	*/
 #ifdef DEBUG_MODE
 	glDebugMessageCallback(
 		[](GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
@@ -237,48 +250,4 @@ const Array<bool>& Window::GetKeyState() const
 const Array<bool>& Window::GetMouseButtonState() const
 {
 	return m_MouseButtons;
-}
-
-unsigned long long d = 0;
-void g_OnDisplay()
-{
-	d++;
-}
-void g_OnWindowResized(int width, int height)
-{
-	s_Window->OnWindowResized(width, height);
-}
-void g_OnKey(unsigned char key, int a, int b)
-{
-	s_Window->OnKeyPress(key);
-}
-void g_OnKeyUp(unsigned char key, int a, int b)
-{
-	s_Window->OnKeyUp(key);
-}
-void g_OnMouse(int button, int state, int x, int y)
-{
-	/*
-	* Catch supported states
-	*/
-	if (state == GLUT_DOWN)
-	{
-		s_Window->OnMouseButtonDown(button);
-	}
-	else if(state == GLUT_UP)
-	{
-		s_Window->OnMouseButtonUp(button);
-	}
-	s_Window->OnMouseMove(x, y);
-}
-void g_OnMouseMove(int x, int y)
-{
-	s_Window->OnMouseMove(x, y);
-}
-void g_OnIdle()
-{
-	const int x = s_Window->GetMouseX();
-	const int y = s_Window->GetMouseY();
-	s_Window->OnMouseMove(x, y);
-	LOG("IDLE");
 }

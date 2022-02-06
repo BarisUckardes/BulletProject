@@ -5,6 +5,7 @@
 
 /// <summary>
 /// A component which holds the camera information
+/// This component registered as an observerable component and will used for renderer to render the world from its view.
 /// </summary>
 class EXPORT ObserverComponent : public Component
 {
@@ -13,6 +14,7 @@ public:
 	virtual bool ShouldLogicTick() const override  { return false; }
 	virtual void OnInitialize() override;
 	virtual void OnDestroyed() override;
+
 	/// <summary>
 	/// Returns the projection matrix
 	/// </summary>

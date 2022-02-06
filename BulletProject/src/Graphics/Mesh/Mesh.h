@@ -5,7 +5,8 @@
 struct GeneratedSphereContent;
 
 /// <summary>
-/// Represents a mesh and its OpenGL handles
+/// Contains the opengl handles for a mesh
+/// Vertex Arrays,Vertex buffers and index buffers all bundled here
 /// </summary>
 class EXPORT Mesh
 {

@@ -17,7 +17,7 @@ void ParentComponent::DestoryChildOrSelf()
     /*
     * Destroy one of the childs
     */
-    m_Childs[0]->GetOwnerEntity()->DestroyEntity();
+    m_Childs[0]->GetOwnerEntity()->MarkEntityDestroyed();
     m_Childs.RemoveIndex(0);
 
     /*
@@ -30,6 +30,6 @@ void ParentComponent::DestoryChildOrSelf()
     */
     if (m_Childs.GetCursor() <= 0)
     {
-        GetOwnerEntity()->DestroyEntity();
+        GetOwnerEntity()->MarkEntityDestroyed();
     }
 }

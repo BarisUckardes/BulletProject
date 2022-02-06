@@ -12,6 +12,7 @@ void SphereColliderComponent::OnInitialize()
 }
 void SphereColliderComponent::OnDestroyed()
 {
+	Component::OnDestroyed();
 	GetOwnerEntity()->GetOwnerWorld()->RemoveColliderComponent(this);
 }
 float SphereColliderComponent::GetRadius() const

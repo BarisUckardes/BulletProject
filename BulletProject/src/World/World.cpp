@@ -85,6 +85,11 @@ void World::RemoveColliderComponent(SphereColliderComponent* component)
 	m_Colliders.Remove(component);
 }
 
+void World::MarkEntityDestroyed(Entity* entity)
+{
+	m_MarkedEntities.Add(entity);
+}
+
 void World::ShowCursor() const
 {
 	m_Window->ShowCursor();
@@ -133,6 +138,40 @@ int World::GetMouseDeltaX() const
 int World::GetMouseDeltaY() const
 {
 	return m_Window->GetMouseDeltaY();
+}
+
+const Array<RenderableComponent*>& World::GetRenderableObjects() const
+{
+	return m_Renderables;
+}
+
+const Array<Component*>& World::GetLogicTickableObjects() const
+{
+	return m_TickableComponents;
+}
+
+const Array<SphereColliderComponent*> World::GetCollisionObjects() const
+{
+	return m_Colliders;
+}
+
+void World::DeleteMarkedEntities()
+{
+	/*
+		* Iterate and delete
+		*/
+	for (unsigned int i = 0; i < m_MarkedEntities.GetCursor(); i++)
+	{
+		m_Entities.Remove(m_MarkedEntities[i]);
+		m_MarkedEntities[i]->FreeEntityComponents();
+		delete m_MarkedEntities[i];
+	}
+	m_MarkedEntities.Clear();
+}
+
+const Array<ObserverComponent*>& World::GetObserverObjects() const
+{
+	return m_Observers;
 }
 
 void World::SolvePhysics()

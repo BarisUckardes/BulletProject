@@ -1,4 +1,9 @@
 #pragma once
+
+/*
+* It just holds simple shaders
+*/
+
 const char g_SphereVertexSource[] = R"glsl(
 #version 450 core
 layout(location = 0) in vec3 aPosition;

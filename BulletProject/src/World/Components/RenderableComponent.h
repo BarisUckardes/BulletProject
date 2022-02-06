@@ -3,8 +3,10 @@
 #include <Graphics/Mesh/Mesh.h>
 #include <Graphics/Shader/ShaderProgram.h>
 #include <glm/vec4.hpp>
+
 /// <summary>
 /// Represents a renderable component
+/// Registers itself to world's rendering objects once its created
 /// </summary>
 class EXPORT RenderableComponent : public Component
 {

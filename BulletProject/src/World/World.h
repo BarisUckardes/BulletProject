@@ -10,6 +10,7 @@ class Entity;
 class Component;
 class Renderer;
 class PhySolver;
+
 /// <summary>
 /// Represents a scene state with the collection of objects
 /// </summary>
@@ -79,12 +80,43 @@ public:
 	/// <param name="component"></param>
 	void RemoveColliderComponent(SphereColliderComponent* component);
 
+	/*
+	* Mark entity destroyed
+	*/
+	void MarkEntityDestroyed(Entity* entity);
 
+	/// <summary>
+	/// Makes cursor visible
+	/// </summary>
 	FORCEINLINE void ShowCursor() const;
+
+	/// <summary>
+	/// Hides the cursor
+	/// </summary>
 	FORCEINLINE void HideCursor() const;
+
+	/// <summary>
+	/// Sets the cursor position
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
 	FORCEINLINE void SetCursorPositionUndetected(int x, int y);
+
+	/// <summary>
+	/// Resets the mouse delta state
+	/// </summary>
 	FORCEINLINE void FlushMouseDelta();
+
+	/// <summary>
+	/// Returns the mouse x
+	/// </summary>
+	/// <returns></returns>
 	FORCEINLINE int GetMouseX() const;
+
+	/// <summary>
+	/// Returns the mouse y
+	/// </summary>
+	/// <returns></returns>
 	FORCEINLINE int GetMouseY() const;
 
 	/// <summary>
@@ -113,6 +145,34 @@ public:
 	/// <returns></returns>
 	FORCEINLINE int GetMouseDeltaY() const;
 
+	/// <summary>
+	/// Returns the observer objects
+	/// </summary>
+	/// <returns></returns>
+	FORCEINLINE const Array<ObserverComponent*>& GetObserverObjects() const;
+
+	/// <summary>
+	/// Returns the renderable objects of this world
+	/// </summary>
+	/// <returns></returns>
+	FORCEINLINE const Array<RenderableComponent*>& GetRenderableObjects() const;
+
+	/// <summary>
+	/// Returns the logic tickable objects of this world
+	/// </summary>
+	/// <returns></returns>
+	FORCEINLINE const Array<Component*>& GetLogicTickableObjects() const;
+
+	/// <summary>
+	/// Returns the collision objects
+	/// </summary>
+	/// <returns></returns>
+	FORCEINLINE const Array<SphereColliderComponent*> GetCollisionObjects() const;
+
+	/// <summary>
+	/// Frees the heap objects of the marked entities
+	/// </summary>
+	void DeleteMarkedEntities();
 private:
 	/// <summary>
 	/// Solves the physical state of the world
@@ -134,6 +194,7 @@ private:
 	/// </summary>
 	void TickInput();
 
+	Array<Entity*> m_MarkedEntities;
 	Array<RenderableComponent*> m_Renderables;
 	Array<ObserverComponent*> m_Observers;
 	Array<SphereColliderComponent*> m_Colliders;

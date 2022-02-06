@@ -2,7 +2,7 @@
 #include <World/Component.h>
 
 /// <summary>
-/// Basic component for detecting sphere collision
+/// Basic physics component which is registered to world physical objects when created
 /// </summary>
 class EXPORT SphereColliderComponent : public Component
 {

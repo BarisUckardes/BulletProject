@@ -3,6 +3,11 @@
 class Entity;
 class Spatial;
 class SphereColliderComponent;
+
+/// <summary>
+/// Simple unit for scripting
+/// They are only and only attached to entity
+/// </summary>
 class EXPORT Component
 {
 	friend class Entity;
@@ -41,16 +46,64 @@ public:
 	/// <returns></returns>
 	FORCEINLINE Entity* GetOwnerEntity() const;
 
-
+	/// <summary>
+	/// Enables the window's cursor
+	/// </summary>
 	FORCEINLINE void ShowCursor() const;
+
+	/// <summary>
+	/// Disables the window's cursor
+	/// </summary>
 	FORCEINLINE void HideCursor() const;
+
+	/// <summary>
+	/// Refreshes to mouse delta
+	/// </summary>
 	FORCEINLINE void FlushMouseDelta() const;
+
+	/// <summary>
+	/// Sets the mouse position in pixels
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
 	FORCEINLINE void SetCursorPosition(int x,int y) const;
+
+	/// <summary>
+	/// Returns whether the is down or not
+	/// </summary>
+	/// <param name="key"></param>
+	/// <returns></returns>
 	FORCEINLINE bool IsKeyDown(unsigned int key) const;
+
+	/// <summary>
+	/// Returns whether the mouse button is down or not
+	/// </summary>
+	/// <param name="button"></param>
+	/// <returns></returns>
 	FORCEINLINE bool IsButtonDown(unsigned int button) const;
+
+	/// <summary>
+	/// Returns the position x in pixels
+	/// </summary>
+	/// <returns></returns>
 	FORCEINLINE int GetMouseX() const;
+
+	/// <summary>
+	/// Returns the position y in pixels
+	/// </summary>
+	/// <returns></returns>
 	FORCEINLINE int GetMouseY() const;
+
+	/// <summary>
+	/// Returns the mouse delta x
+	/// </summary>
+	/// <returns></returns>
 	FORCEINLINE int GetMouseDeltaX() const;
+
+	/// <summary>
+	/// Returns the mouse delta y
+	/// </summary>
+	/// <returns></returns>
 	FORCEINLINE int GetMosueDeltaY() const;
 protected:
 	Component() = default;

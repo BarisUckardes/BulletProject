@@ -1,10 +1,21 @@
 #pragma once
 #include <Memory/String.h>
 
+/// <summary>
+/// Simple struct contains only the command line parameters
+/// </summary>
 struct WindowCmdArgs
 {
 	WindowCmdArgs(int count,char** arguments) : Count(count),Arguments(arguments){}
+
+	/// <summary>
+	/// The quantity of the parameters
+	/// </summary>
 	int Count;
+
+	/// <summary>
+	/// The parameters
+	/// </summary>
 	char** Arguments;
 };
 
@@ -14,7 +25,7 @@ struct WindowCmdArgs
 class EXPORT Window
 {
 public:
-	Window(const String& title, int offsetX, int offsetY, int width, int height,WindowCmdArgs args);
+	Window(const String& title, int offsetX, int offsetY, int width, int height,WindowCmdArgs args,bool bSetInternalCallbacks);
 	~Window();
 
 	/// <summary>
@@ -101,12 +112,38 @@ public:
 	/// <param name="button"></param>
 	void OnMouseButtonUp(int button);
 
+	/// <summary>
+	/// Hides the cursor of this window
+	/// </summary>
 	FORCEINLINE void HideCursor() const;
+
+	/// <summary>
+	/// Shows the cursor of this window
+	/// </summary>
 	FORCEINLINE void ShowCursor() const;
+
+	/// <summary>
+	/// Sets the cursor
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
 	FORCEINLINE void SetCursorPositionUndetected(int x, int y);
+
+	/// <summary>
+	/// Refreshes the mouse delta 
+	/// </summary>
 	FORCEINLINE void FlushMouseDelta();
 
+	/// <summary>
+	/// Returns the mouse position x
+	/// </summary>
+	/// <returns></returns>
 	FORCEINLINE int GetMouseX() const;
+
+	/// <summary>
+	/// Returns the mouse position y
+	/// </summary>
+	/// <returns></returns>
 	FORCEINLINE int GetMouseY() const;
 	/// <summary>
 	/// Returns mouse displacement x
